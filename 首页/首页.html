@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MHRS小蓝书</title>
+    <style>
+        /* 全局样式 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('首页背景图.jfif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* 信纸容器 */
+        .letter-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px; /* 宽度设置为适中的值 */
+            height: 90%; /* 高度覆盖屏幕的大部分 */
+            max-height: 800px; /* 最大高度限制 */
+            background: rgba(255, 255, 255, 0.95); /* 半透明白色背景 */
+            padding: 20px 25px;
+            border-radius: 15px; /* 圆角 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 阴影 */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 上下布局分隔 */
+        }
+
+        /* 文字样式 */
+        .letter-text {
+            color: #1e3c72;
+            font-size: 18px;
+            line-height: 1.8;
+            flex: 1; /* 占据可用空间 */
+        }
+
+        .letter-text h1 {
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .letter-text p {
+            text-indent: 2em;
+            margin-bottom: 15px;
+        }
+
+        /* 图片样式 */
+        .letter-image {
+            display: block;
+            margin: 10px auto;
+            width: 50%; /* 图片宽度占容器的50% */
+            height: auto; /* 保持图片比例 */
+        }
+
+        /* 作者信息 */
+        .author {
+            align-self: flex-end; /* 在容器底部对齐 */
+            text-align: left;
+            color: #1e3c72;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .author p {
+            margin: 0;
+        }
+
+        .author a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .author a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .letter-container {
+                width: 90%;
+                height: 80%; /* 调整为更适合小屏幕的比例 */
+                padding: 15px;
+            }
+
+            .letter-text h1 {
+                font-size: 22px;
+            }
+
+            .letter-text {
+                font-size: 16px;
+            }
+
+            .author {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container">
+        <div class="letter-text">
+            <img class="letter-image" src="小蓝书.png" alt="小蓝书">
+            <h1>『欢迎使用MHRS小蓝书Ver 0.1』</h1>
+            <p>
+                ※ 这里包含了很多有用的游戏技巧、技能列表、任务系统及其他重要信息，帮助你更好地了解和掌握游戏内容。
+            </p>
+            <p>
+                ※ 无论你是新手还是经验丰富的玩家，本手册都将为你提供详细的游戏指南，帮助你提升游戏体验，快速掌握游戏的各项功能与技巧。
+            </p>
+        </div>
+        <div class="author">
+            <p>作者：鲨鱼辣椒</p>
+            <p>邮箱：<a href="mailto:freundlich@foxmail.com">freundlich@foxmail.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

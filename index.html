@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MHRS小蓝书</title>
+    <style>
+        /* 页面基本布局 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: row; /* 横向布局 */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* 左侧目录栏 */
+        .sidebar {
+            width: 330px; /* 固定宽度 */
+            background-color: rgb(18, 48, 87);
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            height: 100vh;
+            position: relative;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 28px;
+            font-family: '微软雅黑', serif; /* 使用自定义字体 */
+        }
+
+        nav ul {
+            list-style: none;
+            padding-left: 0; /* 主菜单无缩进 */
+        }
+
+        nav li {
+            margin: 0px 0; /* 行间距调整为X倍字高 */
+            position: relative;
+        }
+
+        nav li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 4px; /* 减小链接内边距 */
+            transition: background-color 0.3s;
+        }
+
+        nav li a:hover {
+            background-color: #575757;
+        }
+
+        /* 活动页面按钮样式 */
+        nav li a.active {
+            background-color: #808080; /* 设置当前页面按钮为灰色 */
+        }
+
+        /* 禁用父按钮 - 仅改变文字颜色 */
+        nav li > a.disabled {
+            pointer-events: none;
+            color: #d6d3d3; /* 改变禁用按钮的文字颜色 */
+        }
+
+        /* 子菜单样式 */
+        .submenu {
+            list-style: none;
+            padding-left: 20px; /* 仅对子菜单生效的缩进 */
+        }
+
+        /* 右侧内容区域 */
+        .content-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            min-height: 100vh; /* 确保内容区域的最小高度为屏幕高度 */
+            background-image: url('./首页/background.jpg');
+            background-repeat: repeat-y; /* 背景图在垂直方向上重复 */
+            background-position: center center; /* 背景图位置居中 */
+            background-size: 100% 100%; /* 背景图拉伸填充整个容器 */
+            background-attachment: scroll; /* 背景随着页面滚动 */
+            background-origin: padding-box; /* 背景相对于padding框对齐 */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 修正小屏幕下的表现 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px; /* 在小屏幕下调整左侧菜单的宽度 */
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* 滑动子菜单的样式 */
+        .submenu-show {
+            display: block !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 左侧目录栏 -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="./首页/logo.png" alt="logo">
+        </div>
+        <h1>MHRS小蓝书</h1>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="changeContent('首页', this)">●首页</a></li>
+                <li>
+                    <a href="javascript:void(0);" onclick="changeContent('技能列表', this)">●技能列表</a>
+                    <ul class="submenu">
+                        <li><a href="javascript:void(0);" onclick="changeContent('重要技能出处', this)">※ 重要技能出处</a></li>
+                        <li><a href="javascript:void(0);" onclick="changeContent('重要技能详情', this)">※ 重要技能详情</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" onclick="changeContent('怪物肉质', this)">●怪物肉质</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('伤害计算器', this)">●伤害计算器</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('任务系统', this)">●任务系统</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('角色的状态变化', this)">●角色的状态变化</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('装饰品', this)">●装饰品</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('花链', this)">●花链</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('替换技', this)">●替换技</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('杂货店', this)">●杂货店</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('调和', this)">●调和</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('勋章/伟绩徽章', this)">●勋章/伟绩徽章</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('武器怪异炼化', this)">●武器怪异炼化</a></li>
+                <li>
+                    <a href="javascript:void(0);" onclick="changeContent('防具怪异炼化', this)">●防具怪异炼化</a>
+                    <ul class="submenu">
+                        <li><a href="javascript:void(0);" onclick="changeContent('防具cost预算', this)">※ 防具cost预算</a></li>
+                        <li><a href="javascript:void(0);" onclick="changeContent('词条cost点数', this)">※ 词条cost点数</a></li>
+                        <li><a href="javascript:void(0);" onclick="changeContent('技能cost点数', this)">※ 技能cost点数</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" onclick="changeContent('护石技能', this)">●护石技能</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('怪异化素材', this)">●怪异化素材</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('武器使用率', this)">●武器使用率</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('武器动作值', this)">●武器动作值</a></li>
+                <li><a href="javascript:void(0);" onclick="changeContent('小知识', this)">●小知识</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- 右侧内容区域 -->
+    <div class="content-container">
+        <iframe id="contentFrame" src="./首页/首页.html"></iframe> <!-- 默认加载第一个内容页面 -->
+    </div>
+
+    <script>
+        // 切换页面显示内容的方法
+        function changeContent(page, element) {
+            var iframe = document.getElementById('contentFrame');
+            // 更新iframe内容
+            switch (page) {
+                case '首页':
+                    iframe.src = './首页/首页.html'; 
+                    break;
+                case '技能列表':
+                    iframe.src = './技能列表/技能列表.htm'; 
+                    break;
+                case '重要技能出处':
+                    iframe.src = './技能列表/重要技能出处.htm';
+                    break;
+                case '重要技能详情':
+                    iframe.src = './技能列表/重要技能详情.htm';
+                    break;
+                case '怪物肉质':
+                    iframe.src = './怪物肉质/怪物肉质.htm';
+                    break;
+                case '伤害计算器':
+                    iframe.src = './伤害计算器/伤害计算器.html'; 
+                    break;
+                case '任务系统':
+                    iframe.src = './任务系统/任务系统.htm';
+                    break;
+                case '活动任务':
+                    iframe.src = './任务系统/活动任务.htm';
+                    break;
+                case '角色的状态变化':
+                    iframe.src = './角色的状态变化/角色的状态变化.htm';
+                    break;
+                case '装饰品':
+                    iframe.src = './装饰品/装饰品.htm';
+                    break;
+                case '花链':
+                    iframe.src = './花链/花链.htm';
+                    break;
+                case '替换技':
+                    iframe.src = './替换技/替换技.htm';
+                    break;
+                case '杂货店':
+                    iframe.src = './杂货店/杂货店.htm';
+                    break;
+                case '调和':
+                    iframe.src = './调和/调和.htm';
+                    break;
+                case '勋章/伟绩徽章':
+                    iframe.src = './勋章/勋章.htm';
+                    break;
+                case '武器怪异炼化':
+                    iframe.src = './武器怪异炼化/武器怪异炼化.htm';
+                    break;
+                case '防具怪异炼化':
+                    iframe.src = './防具怪异炼化/防具怪异炼化.htm';
+                    break;
+                case '防具cost预算':
+                    iframe.src = './防具怪异炼化/防具cost预算.htm';
+                    break;
+                case '词条cost点数':
+                    iframe.src = './防具怪异炼化/词条cost点数.htm';
+                    break;
+                case '技能cost点数':
+                    iframe.src = './防具怪异炼化/技能cost点数.htm';
+                    break;
+                case '护石技能':
+                    iframe.src = './护石技能/护石技能.htm';
+                    break;
+                case '怪异化素材':
+                    iframe.src = './怪异化素材/怪异化素材.htm';
+                    break;
+                case '武器使用率':
+                    iframe.src = './武器使用率/武器使用率.htm';
+                    break;
+                    case '武器动作值':
+                    iframe.src = './武器动作值/武器动作值.htm';
+                    break;
+                case '小知识':
+                    iframe.src = './小知识/小知识.htm';
+                    break;
+                default:
+                    iframe.src = './首页/首页.html'; // 默认加载
+            }
+
+        // 高亮当前菜单
+            var links = document.querySelectorAll('nav li a');
+            links.forEach(function (link) {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+        
+        // 监听 iframe 加载页面的变化
+            const iframe = document.getElementById('contentFrame');
+
+        // 在每次页面变化时记录当前的 src 到 localStorage
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('currentPage', iframe.src);
+        });
+
+        // 页面加载时，从 localStorage 获取保存的页面 URL
+        window.addEventListener('load', function() {
+            const savedPage = localStorage.getItem('currentPage');
+            if (savedPage) {
+                iframe.src = savedPage; // 设置 iframe 的 src 为上次记录的 URL
+            }
+        });
+    </script>
+</body>
+
+</html>
